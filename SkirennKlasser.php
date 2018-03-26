@@ -119,7 +119,7 @@ class ovelse
     
     public function valider_type($type)
     {
-        return preg_match('/^[a-zæøåA-Z.-]{2,20}$/', $type);
+        return preg_match('/^[0-9a-zæøåA-Z.-]{2,20}$/', $type);
     }
     public function set_dato($dato)
     {
