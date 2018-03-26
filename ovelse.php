@@ -162,39 +162,28 @@ if (isset($_REQUEST['endre'])) {
     $id=$_REQUEST["ovelsesId"];
     
     //REGEX OBJEKT
-    $OK = false;
+    $OK = true;
     
     if(! $ovelse->valider_type($ovelse->get_type())) {
             echo "Brukt riktige tegn!<br>";
             $OK = false;
         } 
-        else {
-            $OK = true;
-        }
         
     if(! $ovelse->valider_dato($ovelse->get_dato())) {
             echo "Feil format på dato. Eks 23.01.2018<br>";
             $OK = false;
         } 
-        else {
-            $OK = true;
-        }
-    
+
     if(! $ovelse->valider_tid($ovelse->get_tid())) {
             echo "Feil format på tid. For eks 12:00<br>";
             $OK = false;
         } 
-        else {
-            $OK = true;
-        }
-    
+
     if(! $ovelse->valider_sted($ovelse->get_sted())) {
             echo "Feil format på sted<br>";
             $OK = false;
         } 
-        else {
-            $OK = true;
-        }
+
         
     if($OK) {
         $sql = 'UPDATE ovelse SET ovelse="'.$ovelse->get_type().'", dato="'.$ovelse->get_dato().'", tid="'.$ovelse->get_tid().'", sted="'.$ovelse->get_sted().'" WHERE ovelseId="'.$id.'"';
