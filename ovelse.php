@@ -104,41 +104,32 @@ if (isset($_REQUEST['legg'])) {
             $ovelse->set_tid($_REQUEST['tid']);
             $ovelse->set_sted($_REQUEST['sted']);
     
-    $OK = false;
+    $OK = true;
     
     //REGEX LEGG TIL
     if(! $ovelse->valider_type($ovelse->get_type())) {
             echo "Brukt riktige tegn!<br>";
             $OK = false;
         } 
-        else {
-            $OK = true;
-        }
+
         
     if(! $ovelse->valider_dato($ovelse->get_dato())) {
             echo "Feil format på dato. Eks 23.01.2018<br>";
             $OK = false;
         } 
-        else {
-            $OK = true;
-        }
+
     
     if(! $ovelse->valider_tid($ovelse->get_tid())) {
             echo "Feil format på tid. For eks 12:00<br>";
             $OK = false;
         } 
-        else {
-            $OK = true;
-        }
+
     
     if(! $ovelse->valider_sted($ovelse->get_sted())) {
             echo "Feil format på sted<br>";
             $OK = false;
         } 
-        else {
-            $OK = true;
-        }
-        
+
         if($OK) {
         mysqli_query($db, "INSERT INTO ovelse(ovelse, dato, tid, sted)
                     VALUES ('" . $ovelse->get_type() . "','" . $ovelse->get_dato() . "','" . $ovelse->get_tid() . "','" . $ovelse->get_sted() . "') ");
