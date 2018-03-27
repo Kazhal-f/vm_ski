@@ -150,28 +150,33 @@ if (isset($_REQUEST['endre'])) {
             $ovelse->set_dato($_REQUEST['dato']);
             $ovelse->set_tid($_REQUEST['tid']);
             $ovelse->set_sted($_REQUEST['sted']);
-    $id=$_REQUEST["ovelsesId"];
-    
+            
+    $id = $_REQUEST["ovelsesId"];
+
     //REGEX OBJEKT
+    if (!preg_match('/^[1-9]{1,1000}$/', $id)) {
+        echo "Feil format på ØvelsesId. Skriv kun tallet på den øvelsen du ønsker å endre.</br>";
+    }
+    
     $OK = true;
     
     if(! $ovelse->valider_type($ovelse->get_type())) {
-            echo "Brukt riktige tegn!<br>";
+            echo "Feil format på type. Riktig format er for eks 10mila.<br>";
             $OK = false;
         } 
         
     if(! $ovelse->valider_dato($ovelse->get_dato())) {
-            echo "Feil format på dato. Eks 23.01.2018<br>";
+            echo "Feil format på dato. Riktig format er for eks 23.01.2018<br>";
             $OK = false;
         } 
 
     if(! $ovelse->valider_tid($ovelse->get_tid())) {
-            echo "Feil format på tid. For eks 12:00<br>";
+            echo "Feil format på tid. Riktig format er for eks 12:00<br>";
             $OK = false;
         } 
 
     if(! $ovelse->valider_sted($ovelse->get_sted())) {
-            echo "Feil format på sted<br>";
+            echo "Feil format på sted. Riktig format er for eks Oslo.<br>";
             $OK = false;
         } 
 
@@ -181,16 +186,12 @@ if (isset($_REQUEST['endre'])) {
         $resultat = $db->query($sql);
         }
     
-    
-    
-    
-    
-    /*
+    //KONTROLL
     if ($db->query($sql) === TRUE) {
-    echo "Record updated successfully";
+    echo "Endring av øvelse ble gjennomført.";
     } else {
-    echo "Error updating record: " . $db->error;
-    }*/
+    echo "Det har desverre skjedd en feil og endring av øvelse har ikke blitt gjennomført." . $db->error;
+    }
 }
 
 //SLETT
