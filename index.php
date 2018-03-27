@@ -1,11 +1,8 @@
 <?php
-
-require_once 'db.php';
-include 'SkirennKlasser.php';
-include 'feilhandtering.php';
-
-
+    require_once 'db.php';
+    include 'SkirennKlasser.php';
 ?>
+
 <html>
     <head>
         <title>Skirennregister</title> 
