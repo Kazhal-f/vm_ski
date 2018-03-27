@@ -51,7 +51,7 @@ class person
     
     public function valider_adresse($adresse)
     {
-        return preg_match('/^[0-9a-zæøåA-Z.-]{2,30}$/', $adresse);
+        return preg_match('/^[0-9a-zæøåA-Z. -]{2,30}$/', $adresse);
     }
     
     public function set_postnr($postnr)
@@ -116,7 +116,7 @@ class utover extends person
     
     public function valider_nasjonalitet($nasjonalitet)
     {
-        return preg_match('/^[a-zæøåA-Z.-]{2,20}$/', $nasjonalitet);
+        return preg_match('/^[a-zæøåA-Z. -]{2,20}$/', $nasjonalitet);
     }
 }
 

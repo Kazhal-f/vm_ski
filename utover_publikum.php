@@ -1,7 +1,8 @@
 <?php
+    include 'SkirennKlasser.php';
     session_start();
     require_once 'db.php';
-    include 'SkirennKlasser.php';
+    
 ?>
 
 <html>
@@ -22,6 +23,8 @@
                 $utover->set_adresse($_REQUEST['adresse']);
                 $utover->set_postnr($_REQUEST['postnr']);
                 $utover->set_poststed($_REQUEST['poststed']);
+                
+                $_SESSION["utover"] = serialize($utover);
                 
                 //REGEX
                 $OK = true;
@@ -68,7 +71,6 @@
                 }
                 
                 if ($OK) {
-                    $_SESSION["utover"] = serialize($utover);
                     echo '<h3>Skriv inn nasjonalitet og velg øvelse</h3>';
                     echo '<form action="bekreftelse.php" method="post">
                             <table>
@@ -100,6 +102,8 @@
                 $publikum->set_adresse($_REQUEST['adresse']);
                 $publikum->set_postnr($_REQUEST['postnr']);
                 $publikum->set_poststed($_REQUEST['poststed']);
+                
+                $_SESSION["publikum"] = serialize($publikum);
                 
                 //REGEX
                 $OK = true;
@@ -146,7 +150,6 @@
                 }
                 
                 if ($OK) {
-                    $_SESSION["publikum"] = serialize($publikum);
                     
                     echo '<h3>Billettype</3>
                         <form action="bekreftelse.php" method="post">

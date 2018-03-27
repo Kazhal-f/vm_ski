@@ -1,7 +1,8 @@
 <?php
-        session_start();
-        require_once 'db.php';
-        ?>
+    include 'SkirennKlasser.php';
+    session_start();
+    require_once 'db.php';
+?>
 <!DOCTYPE html>
 <html>
     <body>
@@ -56,6 +57,7 @@
         if (isset($_REQUEST["registrerpublikum"])) {
             $publikum = unserialize($_SESSION["publikum"]);
             $publikum->set_billettype($_REQUEST["billettype"]);
+            var_dump($publikum);
             $ovelseId = $_REQUEST["ovelseId"];
             
             //REGEX
