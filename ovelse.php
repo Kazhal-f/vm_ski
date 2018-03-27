@@ -197,8 +197,22 @@ if (isset($_REQUEST['endre'])) {
 //SLETT
 if (isset($_REQUEST['slett'])) {
     $slettmeg= $_REQUEST["ovelses_id"];
-    $sql = 'DELETE FROM ovelse WHERE ovelseID="'.$slettmeg.'"';
-    $resultat = $db->query($sql);
+    
+    //REGEX
+    if (!preg_match('/^[1-9]{1,1000}$/', $slettmeg)) {
+        echo "Feil format på ØvelsesId. Skriv kun tallet på den øvelsen du ønsker å endre.</br>";
+    }
+    else {
+        $sql = 'DELETE FROM ovelse WHERE ovelseID="'.$slettmeg.'"';
+        $resultat = $db->query($sql);
+        //KONTROLL
+        if ($db->query($sql) === TRUE) {
+        echo "Sletting av øvelse ble gjennomført.";
+        } else {
+        echo "Det har desverre skjedd en feil og sletting av øvelse har ikke blitt gjennomført." . $db->error;
+        }
+    }
+    
     
 }
 ?>
