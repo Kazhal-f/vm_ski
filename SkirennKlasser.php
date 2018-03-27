@@ -18,6 +18,11 @@ class person
     {
         return $this->fornavn;
     }
+    
+    public function valider_fornavn($fornavn)
+    {
+        return preg_match('/^[a-zæøåA-Z.-]{2,20}$/', $fornavn);
+    }
    
     public function set_etternavn($etternavn)
     {
@@ -27,6 +32,11 @@ class person
     public function get_etternavn()
     {
         return $this->etternavn;
+    }
+    
+    public function valider_etternavn($etternavn)
+    {
+        return preg_match('/^[a-zæøåA-Z.-]{2,20}$/', $etternavn);
     }
     
     public function set_adresse($adresse)
@@ -39,6 +49,11 @@ class person
         return $this->adresse;
     }
     
+    public function valider_adresse($adresse)
+    {
+        return preg_match('/^[0-9a-zæøåA-Z.-]{2,30}$/', $adresse);
+    }
+    
     public function set_postnr($postnr)
     {
         $this->postnr = $postnr;
@@ -47,6 +62,11 @@ class person
     public function get_postnr()
     {
         return $this->postnr;
+    }
+    
+    public function valider_postnr($postnr)
+    {
+        return preg_match('/^[0-9]{4}$/', $postnr);
     }
     
     public function set_poststed($poststed)
@@ -59,6 +79,11 @@ class person
         return $this->poststed;
     }
     
+    public function valider_poststed($poststed)
+    {
+        return preg_match('/^[a-zæøåA-Z.-]{2,20}$/', $poststed);
+    }
+    
     public function set_telefonnr($telefonnr)
     {
         $this->telefonnr = $telefonnr;
@@ -67,6 +92,11 @@ class person
     public function get_telefonnr()
     {
         return $this->telefonnr;
+    }
+    
+    public function valider_telefonnr($telefonnr)
+    {
+        return preg_match('/^[0-9]{8}$/', $telefonnr);
     }
 }
 
@@ -82,6 +112,11 @@ class utover extends person
     public function get_nasjonalitet()
     {
         return $this->nasjonalitet;
+    }
+    
+    public function valider_nasjonalitet($nasjonalitet)
+    {
+        return preg_match('/^[a-zæøåA-Z.-]{2,20}$/', $nasjonalitet);
     }
 }
 
@@ -121,6 +156,7 @@ class ovelse
     {
         return preg_match('/^[0-9a-zæøåA-Z.-]{2,20}$/', $type);
     }
+    
     public function set_dato($dato)
     {
         $this->dato = $dato;
