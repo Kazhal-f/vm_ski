@@ -21,7 +21,7 @@
                     <td><input type="text" name="passord"></td>
                 </tr>
                 <tr>
-                    <td><input type="submit" name="loggInn" value="Logg Inn"></td>
+                    <td><input type="submit" name="registrer" value="Registrer"></td>
                 </tr>
             </table>
         </form>
@@ -37,8 +37,22 @@
 </html>
 
 <?php
-$brukernavn = $_POST["brukernavn"];
-$passord = $_POST["passord"];
+
+//BrukerREG
+if(isset($_POST["registrer"])) {
+    $brukernavn = mysqli_real_escape_string($db, $_POST["brukernavn"]);
+    $passord = md5($_POST["passord"]);
+    
+    $sql = "INSERT INTO 'brukere' (brukernavn, passord) VALUES ('$brukernavn', '$passord')";
+    $resulat = mysqli_query($db, $sql);
+    if($resulat) {
+        echo "Registrert";
+    }
+    else {
+        echo "Feilet";
+    }
+}
+
 
 
 
