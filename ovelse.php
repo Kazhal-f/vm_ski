@@ -2,86 +2,96 @@
     session_start();
     require_once 'db.php';
     include "SkirennKlasser.php";
-?>
-<html>
-    <head>
-        <title>Skirennregister</title> 
-    </head>
-    <body>
-        <form action="index.php" method="">
-            <table>
-                <tr>
-                    <td><input type="submit" value="Tilbake til forsiden"></td>
-                </tr>
-            </table>
-        </form> 
-        <h3>Legg til øvelse her:</h3>
-        <form action="" method="post">
-            <table>
-                <tr>
-                    <td>Type:</td>
-                    <td><input type="text" name="type"></td>
-                </tr>
-                <tr>
-                    <td>Dato:</td>
-                    <td><input type="text" name="dato"></td>
-                </tr>
-                <tr>
-                    <td>Tid:</td>
-                    <td><input type="text" name="tid"></td>
-                </tr>
-                <tr>
-                    <td>Sted:</td>
-                    <td><input type="text" name="sted"></td>
-                </tr>
-                <tr>
-                    <td><input type="submit" name="legg" value="Legg til"></td>
-                </tr>
-            </table>
-        </form> 
-        <h3>Endre øvelse her:</h3>
-        <form action="" method="post">
-            <table>
-                <tr>
-                    <td>ØvelsesId</td>
-                    <td><input type='text' name='ovelsesId'></td>
-                </tr>
-                <tr>
-                    <td>Type:</td>
-                    <td><input type="text" name="type"></td>
-                </tr>
-                <tr>
-                    <td>Dato:</td>
-                    <td><input type="text" name="dato"></td>
-                </tr>
-                <tr>
-                    <td>Tid:</td>
-                    <td><input type="text" name="tid"></td>
-                </tr>
-                <tr>
-                    <td>Sted:</td>
-                    <td><input type="text" name="sted"></td>
-                </tr>
-                <tr>
-                    <td><input type="submit" name="endre" value="Endre"></td>
-                </tr>
-            </table>
-        </form>
-        <h3>Skriv inn ØvelsesId for å oppdatere eller slette øvelse</h3>
-        <form action='' method='post'>
-            <table>
-                <tr>
-                    <td><input type='text' name='ovelses_id'></td>
-                </tr>
-                <tr>
-                    <td><input type='submit' name='slett' value='Slett'></td>
-                </tr>
-                
-            </table>
-        </form>
-    </body>  
-</html>
-<?php
+
+    //LOGGINN SJEKK 
+    If (!$_SESSION["loggetInn"]){
+    echo "Du er ikke logget på ! Trykk her for å gå til forsiden:";
+    echo "<a href='index.php'>Tilbake</a>";
+    die(); 
+    }
+
+//LOGGINN SJEKK OK
+if ($_SESSION["loggetInn"]) {
+    echo '<html>
+            <head>
+                <title>Skirennregister</title> 
+            </head>
+            <body>
+                <form action="index.php" method="">
+                    <table>
+                        <tr>
+                            <td><input type="submit" value="Tilbake til forsiden"></td>
+                        </tr>
+                    </table>
+                </form> 
+                <h3>Legg til øvelse her:</h3>
+                <form action="" method="post">
+                    <table>
+                        <tr>
+                            <td>Type:</td>
+                            <td><input type="text" name="type"></td>
+                        </tr>
+                        <tr>
+                            <td>Dato:</td>
+                            <td><input type="text" name="dato"></td>
+                        </tr>
+                        <tr>
+                            <td>Tid:</td>
+                            <td><input type="text" name="tid"></td>
+                        </tr>
+                        <tr>
+                            <td>Sted:</td>
+                            <td><input type="text" name="sted"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="submit" name="legg" value="Legg til"></td>
+                        </tr>
+                    </table>
+                </form> 
+                <h3>Endre øvelse her:</h3>
+                <form action="" method="post">
+                    <table>
+                        <tr>
+                            <td>ØvelsesId</td>
+                            <td><input type="text" name="ovelsesId"></td>
+                        </tr>
+                        <tr>
+                            <td>Type:</td>
+                            <td><input type="text" name="type"></td>
+                        </tr>
+                        <tr>
+                            <td>Dato:</td>
+                            <td><input type="text" name="dato"></td>
+                        </tr>
+                        <tr>
+                            <td>Tid:</td>
+                            <td><input type="text" name="tid"></td>
+                        </tr>
+                        <tr>
+                            <td>Sted:</td>
+                            <td><input type="text" name="sted"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="submit" name="endre" value="Endre"></td>
+                        </tr>
+                    </table>
+                </form>
+                <h3>Skriv inn ØvelsesId for å oppdatere eller slette øvelse</h3>
+                <form action="" method="post">
+                    <table>
+                        <tr>
+                            <td><input type="text" name="ovelses_id"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="submit" name="slett" value="Slett"></td>
+                        </tr>
+
+                    </table>
+                </form>
+            </body>  
+        </html>';
+}
+
 
 $sql = "SELECT * FROM ovelse";
 $resultat = $db->query($sql);
