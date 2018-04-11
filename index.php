@@ -92,7 +92,7 @@ if (isset($_POST["logg_inn_bruker"])) {
         header("location: ./ovelse.php");
         }
     if (!$ok) {
-        echo "Passordet stemte ikke med brukernavnet du skrev inn!";
+        echo "</br>Passordet stemte ikke med brukernavnet du skrev inn!";
     }
     }
 }
