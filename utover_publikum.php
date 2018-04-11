@@ -13,7 +13,7 @@
        <?php
         
         if (isset($_REQUEST["registrer"])) {
-            //UTOVER
+            /*//UTOVER
             if ($_REQUEST["valg"] == "utover") {
             
                 $utover = new utover;
@@ -90,10 +90,10 @@
                 }
 
                 
-            }
+            }*/
             
             //PUBLIKUM
-            if ($_REQUEST["valg"] == "publikum") { 
+            //if ($_REQUEST["valg"] == "publikum") { 
 
                 $publikum = new publikum;
                 $publikum->set_fornavn($_REQUEST['fornavn']);
@@ -173,7 +173,7 @@
                 }
 
                 
-            }
+            //}
             
             
             
