@@ -1,18 +1,10 @@
 <?php
     session_start();
     require_once 'db.php';
-    include "SkirennKlasser.php";
-
-    //LOGGINN SJEKK 
-    If (!$_SESSION["loggetInn"]){
-    echo "Du er ikke logget på ! Trykk her for å gå til forsiden:";
-    echo "<a href='index.php'>Tilbake</a>";
-    die(); 
-    }
-
-//LOGGINN SJEKK OK
-if ($_SESSION["loggetInn"]) {
-    echo '<html>
+    include 'skirennKlasser.php';
+    include 'test_logginn.php';
+?>
+<html>
             <head>
                 <title>Skirennregister</title> 
             </head>
@@ -76,7 +68,7 @@ if ($_SESSION["loggetInn"]) {
                         </tr>
                     </table>
                 </form>
-                <h3>Skriv inn ØvelsesId for å oppdatere eller slette øvelse</h3>
+                <h3>Skriv inn ØvelsesId for å slette øvelse:</h3>
                 <form action="" method="post">
                     <table>
                         <tr>
@@ -89,10 +81,8 @@ if ($_SESSION["loggetInn"]) {
                     </table>
                 </form>
             </body>  
-        </html>';
-}
-
-
+        </html>
+<?php
 $sql = "SELECT * FROM ovelse";
 $resultat = $db->query($sql);
 $antallRader = $db->affected_rows;
