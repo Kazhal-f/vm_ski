@@ -1,12 +1,14 @@
 <?php
+    ob_start();
+    session_start();
     require_once 'db.php';
     include 'SkirennKlasser.php';
-?>
-
+    ?>
 <html>
     <head>
         <title>Skirennregister</title> 
         <script type="text/javascript">
+            //PUBLIKUM JS REGEX
             function valider_navn() {
                 regEx = /^[a-åA-Å.\-]{3,20}$/;
                 OK = regEx.test(document.publikum.fornavn.value);
@@ -28,7 +30,7 @@
             return true; }
         
             function valider_adresse() {
-                regEx = /^[a-åA-Å0-9.\-]{3,30}$/;
+                regEx = /^[a-åA-Å0-9. \-]{3,30}$/;
                 OK = regEx.test(document.publikum.adresse.value);
             if (!OK) {
                 document.getElementById("feilAdresse").innerHTML="Feil format i adressen";
@@ -65,6 +67,17 @@
                 return false;
             }
             document.getElementById("feilTlf").innerHTML="";
+            return true; }
+        
+            //LOGGINN JS REGEX
+            function valider_brukernavn() {
+                regEx = /^[a-åA-Å.\-]{3,30}$/;
+                OK = regEx.test(document.logginn.brukernavn.value);
+            if (!OK) {
+                document.getElementById("feilBrukernavn").innerHTML="Feil format. Kun norske numre";
+                return false;
+            }
+            document.getElementById("feilBrukernavn").innerHTML="";
             return true; }
         </script>
     </head>
@@ -116,16 +129,18 @@
                 </tr>
             </table>
         </form>
-        <h3>Vennligst logg inn her for å endre deltakere og øvelser:</h3>
-        <form action="" method="post">
+        <h3>Vennligst logg inn her for å komme til administrasjonssiden:</h3>
+        <form action="" method="post" name="logginn">
             <table>
                 <tr>
                     <td>Brukernavn:</td>
-                    <td><input type="text" name="brukernavn"></td>
+                    <td><input type="text" name="brukernavn" onchange="valider_brukernavn()"></td>
+                    <td><div id="feilBrukernavn">*</div></td>
                 </tr>
                 <tr>
                     <td>Passord:</td>
                     <td><input type="password" name="passord"></td>
+                    <td><div id="feilPassord">*</div></td>
                 </tr>
                 <tr>
                     <td><input type="submit" name="logg_inn_bruker" value="Logg Inn"></td>
@@ -134,9 +149,7 @@
         </form>
     </body>  
 </html>
-
 <?php
-session_start();
 //SJEKK LOGGINN
 if (isset($_POST["logg_inn_bruker"])) {
     $passord = md5($_POST["passord"]);
@@ -161,8 +174,20 @@ if (isset($_POST["logg_inn_bruker"])) {
         echo "</br>Passordet stemte ikke med brukernavnet du skrev inn!";
     }
     }
+    
+    //SJEKK LOGGINN PHP
+    $username = $_POST["brukernavn"];
+    $password = $_POST["passord"];
+    
+    if (!preg_match("/^[A-Za-z][A-Za-z0-9]{3,30}$/", $username))
+    {
+    echo "Feil i brukernavnet, må være mellom 3 og 30 tegn!<br/>";
+    $OK=false;
+    } 
+    if (!preg_match("/^[A-Za-z][A-Za-z0-9]{3,30}$/", $password))
+    {
+    echo "Feil format i passord!<br/>";
+    $OK=false;
+    }
 }
 ?>
-
-
-
