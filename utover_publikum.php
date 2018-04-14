@@ -2,12 +2,6 @@
     include 'SkirennKlasser.php';
     session_start();
     require_once 'db.php';
-    
-    If (!$_SESSION["loggetInn"]){
-    echo "Du er ikke logget på ! Trykk her for å gå til forsiden:";
-    echo "<a href='index.php'>Tilbake</a>";
-    die(); 
-    }
 ?>
 
 <html>
