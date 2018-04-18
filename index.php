@@ -84,7 +84,7 @@
     <body>
         <h1>Skirennregister</h1>
         <h3>Registrer deg som publikum her:</h3>
-        <form action="utover_publikum.php" method="post" name="publikum">
+        <form action="publikum.php" method="post" name="publikum">
             <table>
                 <tr>
                     <td>Fornavn:</td>
